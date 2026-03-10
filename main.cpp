@@ -4,7 +4,9 @@
 #include <sstream>
 using namespace std;
 
+//hiasd
 int main() {
+  cout << "hi" << endl;
   vector<pair<regex, string>> patterns = {
       {regex(R"(^\b(var|input|output)\b)"), "Keyword"},
       {regex(R"(^0|^[1-9][0-9]*)"), "Integer"},
