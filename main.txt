@@ -1,7 +1,5 @@
-var x;
-var y;
-
-input x;
-y = x + 5;
-
-output y;
+var y = 3;
+var z;
+input z;
+var x = y + 3 * (z / 2);
+output x;
