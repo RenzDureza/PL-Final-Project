@@ -123,8 +123,8 @@ void tokenizeCode(const string& myCode){
 			size_t start = pos;
 			pos += 2;
 			while (pos < myCode.size() && myCode[pos+1] != '\n') pos++;
-			pos++;
-			line.push_back({myCode.substr(start, pos-start), "Comment"});
+			pos += 2;
+			line.push_back({myCode.substr(start, pos-start-1), "Comment"});
 			token_lines.push_back(line);
 			line.clear();
 			continue;
