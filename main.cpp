@@ -84,8 +84,11 @@ int main() {
 	//Parsing
 	parseTokens();
 
-	//If no error found
-	if (!errorFound) {
+	//If error was found
+	if (errorFound){
+		cout << "Error found. Not executing Program." << endl;
+	}
+	else {
 		//Execute Code
 		executeCode();
 
@@ -284,6 +287,7 @@ void parseTokens(){
 					}
 					else if (line[i].second == "Identifier" && !varExists(line[i].first)){
 						cout << "Identifier " << line[i].first << " was not declared first." << endl;
+						errorFound = true;
 						break;
 					}
 					else {
