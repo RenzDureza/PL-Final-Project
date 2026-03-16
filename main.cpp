@@ -84,8 +84,11 @@ int main() {
 	//Parsing
 	parseTokens();
 
-	//If no error found
-	if (!errorFound) {
+	//If error was found
+	if (errorFound) {
+		cout << "Error found. Not executing Program." << endl;
+	}
+	else {	
 		//Execute Code
 		executeCode();
 
@@ -123,8 +126,8 @@ void tokenizeCode(const string& myCode){
 			size_t start = pos;
 			pos += 2;
 			while (pos < myCode.size() && myCode[pos+1] != '\n') pos++;
-			pos++;
-			line.push_back({myCode.substr(start, pos-start), "Comment"});
+			pos += 2;
+			line.push_back({myCode.substr(start, pos-start-1), "Comment"});
 			token_lines.push_back(line);
 			line.clear();
 			continue;
@@ -243,8 +246,8 @@ void parseTokens(){
 	cout << "==========================" << " Parsing.." << endl;
 	for (const auto &line : token_lines) {
 		auto last = line.size() - 1;
-		for (const auto &pair : line) {
-		}
+		// for (const auto &pair : line) {
+		// }
 		/*
 		var
 		-- Initializes identifiers as variables
@@ -284,6 +287,7 @@ void parseTokens(){
 					}
 					else if (line[i].second == "Identifier" && !varExists(line[i].first)){
 						cout << "Identifier " << line[i].first << " was not declared first." << endl;
+						errorFound = true;
 						break;
 					}
 					else {
@@ -294,12 +298,12 @@ void parseTokens(){
 				expression_queue.push({line[1].first, expression});
 			}
 			else if (line[last-1].second == "Operator" && line[last].second == "Terminator") {
-				cout << "Missing identifier or integer " << line[last-1].second << "at line at Line " << l_count<< endl;
+				cout << "Missing identifier or integer at Line " << l_count << endl;
 				errorFound = true;
 				break;
 			}
 			else {
-				cout << "Out of Scope var use at at Line " << l_count << endl;
+				cout << "Out of Scope var use at Line " << l_count << endl;
 				errorFound = true;
 				break;
 			}
